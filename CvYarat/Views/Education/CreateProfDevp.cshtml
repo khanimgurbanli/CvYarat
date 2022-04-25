@@ -1,0 +1,66 @@
+﻿@using CvYarat.ViewModel
+@model AddCertificationImage
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <h3>Şəxsi məlumatlar</h3><br /><br />
+    <h5 class="text-danger">@ViewBag.checkResultMessage</h5>
+    <div>
+        <form class="form-group" asp-action="CreateProfDevp" asp-controller="Education" method="post" enctype="multipart/form-data">
+
+
+            <label>Təlimin adı</label><br /><br />
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })<br />
+
+            <label>Təlimçinin ədı və soyadı</label><br /><br />
+            @Html.TextBoxFor(x => x.NameSurname, new { @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.NameSurname, "", new { @class = "text-danger" })<br />
+
+            <label>Təlimçinin əlaqə nömrəsi</label><br /><br />
+            @Html.TextBoxFor(x => x.Tel, new { @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.Tel, "", new { @class = "text-danger" })<br />
+
+
+            <label>Təlimçinin e-poçt ünvanı</label><br /><br />
+            @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })<br />
+
+
+            <label>Təlimi verən qurum</label><br /><br />
+            @Html.TextBoxFor(x => x.Instition, new { @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.Instition, "", new { @class = "text-danger" })<br />
+
+
+            <label>Təlimin keçirildiyi yer</label><br /><br />
+            @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.Address, "", new { @class = "text-danger" })<br />
+
+            <label>Təlimin başladığı tarix</label><br /><br />
+            @Html.TextBoxFor(x => x.ProfBeginDate, new { type = "date", @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.ProfEndDate, "", new { @class = "text-danger" })<br />
+
+            <label>Təlimin bitdiyi tarix</label><br /><br />
+            @Html.TextBoxFor(x => x.ProfEndDate, new { type = "date", @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.ProfEndDate, "", new { @class = "text-danger" })<br />
+
+            <label>Təlimlə bağlı əlavə qeydlər</label><br /><br />
+            @Html.TextBoxFor(x => x.Note, new { @class = "form-control" })<br />
+
+
+            <div class="form-group">
+                <label>Sertifikatı yükləyin</label><br />
+                <input type="file" name="CertificatFile" class="form-control" />
+            </div><br /><br />
+
+            <input type="submit" class="btn btn-success" value="Yadda saxla">
+        </form>
+    </div>
+</body>
+</html>

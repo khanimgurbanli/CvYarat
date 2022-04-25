@@ -1,0 +1,106 @@
+﻿@using CvYarat.ViewModel
+@using CvYarat.Data.Enums
+@model EditProfileImage
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <h3>Şəxsi məlumatlar</h3><br /><br />
+    <div>
+        <form class="form-group" asp-action="Edit" asp-controller="PrivateInfo" method="post" enctype="multipart/form-data">
+            <div>
+                @Html.HiddenFor(x => x.Id, new { Value = Model.Id, @class = "form-control" })<br />
+
+                <div>
+                    <img src="@("~/images/"+ Model.Photo)" asp-append-version="true" width="250px" height="250px" />
+                </div><br /><br />
+
+
+                <div class="form-group">
+                    <label>Foto yükləyin</label><br />
+                    <input type="file" name="ImageFile" class="form-control" />
+                </div><br /><br />
+
+                <label>Ad</label><br /><br />
+                @Html.TextBoxFor(x => x.Name, new { Value = Model.Name, @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })<br />
+
+                <label>Soyad</label><br /><br />
+                @Html.TextBoxFor(x => x.Surname, new { Value = Model.Surname, @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.Surname, "", new { @class = "text-danger" })<br />
+
+                <label>Ata adı</label><br /><br />
+                @Html.TextBoxFor(x => x.FatherName, new { Value = Model.FatherName, @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.FatherName, "", new { @class = "text-danger" })<br />
+
+                <label>Cinsiyyət</label><br /><br />
+                @Html.DropDownListFor(x => x.Gender, new SelectList(Enum.GetValues(typeof(SelectGender))), new { @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.Gender, "", new { @class = "text-danger" })<br />
+
+                <label>Doğum tarixi</label><br /><br />
+                @Html.TextBoxFor(x => x.Birthdate, new { Value = Model.Birthdate, @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.Birthdate, "", new { @class = "text-danger" })<br />
+
+
+                <label>Ailə vəziyyəti</label><br /><br />
+                @Html.DropDownListFor(x => x.MaritalStatus, new SelectList(Enum.GetValues(typeof(MrtlStatus))), new { @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.MaritalStatus, "", new { @class = "text-danger" })<br />
+
+
+                <label>Vətəndaşlıq</label><br />
+                @Html.TextBoxFor(x => x.Citizenship, new { Value = Model.Citizenship, @class = "form-control" })<br />
+
+                <label>Elektron poçt ünvanı</label><br />
+                @Html.TextBoxFor(x => x.Mail, new { Value = Model.Mail, @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.Mail, "", new { @class = "text-danger" })<br />
+
+
+                <label>Sürücülük vəsiqəsi</label><br />
+                @Html.DropDownListFor(x => x.DrivingLicense, new SelectList(Enum.GetValues(typeof(DrvgLicense))), new { @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.DrivingLicense, "", new { @class = "text-danger" })<br />
+
+
+                <label>Hərbi xidmət</label><br />
+                @Html.DropDownListFor(x => x.MilitaryService, new SelectList(Enum.GetValues(typeof(MltryService))), new { @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.MilitaryService, "", new { @class = "text-danger" })<br />
+
+
+                <label>Yaşayış ünvanı</label><br />
+                @Html.TextBoxFor(x => x.LivingAddress, new { Value = Model.LivingAddress, @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.LivingAddress, "", new { @class = "text-danger" })<br />
+
+
+                <label>Qeydiyyatda olduğunuz</label><br />
+                @Html.TextBoxFor(x => x.RegistrationAddress, new { Value = Model.RegistrationAddress, @class = "form-control" })<br />
+
+                <label>Mobil Nömrə</label><br />
+                @Html.TextBoxFor(x => x.MobPhone, new { Value = Model.MobPhone, @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.MobPhone, "", new { @class = "text-danger" })<br />
+
+
+                <label>Linkedin hesab linki</label><br />
+                @Html.TextBoxFor(x => x.Linkedin, new { Value = Model.Linkedin, @class = "form-control" })<br />
+
+                <label>Github hesab linki</label><br />
+                @Html.TextBoxFor(x => x.Github, new { Value = Model.Github, @class = "form-control" })<br />
+
+                <label>Yaşadığınız şəhər</label><br /><br />
+                @Html.DropDownListFor(x => x.CityId, (List<SelectListItem>)@ViewData["City"], new { @class = "form-control" })<br />
+                @Html.ValidationMessageFor(x => x.CityId, "", new { @class = "text-danger" })<br />
+
+                <label>Əlavə qeyd</label><br />
+                @Html.TextBoxFor(x => x.Action, new { Value = Model.Action, @class = "form-control" })<br />
+                <input type="submit" class="btn btn-success" value="Yadda saxla">
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>

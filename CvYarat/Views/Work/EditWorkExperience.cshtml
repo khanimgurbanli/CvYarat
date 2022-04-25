@@ -1,0 +1,64 @@
+﻿@using CvYarat.Models
+@using CvYarat.Data.Enums
+@model WorkExperience
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div>
+        <form class="form-group" asp-action="EditWorkExperience" asp-controller="Work" method="post">
+
+            @Html.HiddenFor(x => x.Id)
+
+            <label>Müəssisə adı </label><br /><br />
+            @Html.TextBoxFor(x => x.InstitutionName, new { Valu = Model.InstitutionName, @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.InstitutionName, "", new { @class = "text-danger" })<br />
+
+
+            <label>Öhtəliyiniz</label><br /><br />
+            @Html.TextBoxFor(x => x.Commitment, new { Valu = Model.Commitment, @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.Commitment, "", new { @class = "text-danger" })<br />
+
+            <label>Başlama tarixi</label><br /><br />
+            @Html.TextBoxFor(x => x.BeginDate, new { Valu = Model.BeginDate, @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.BeginDate, "", new { @class = "text-danger" })<br />
+
+
+            <label>Bitmə tarixi</label><br /><br />
+            @Html.TextBoxFor(x => x.EndDate, new { Valu = Model.EndDate, @class = "form-control" })<br />
+
+
+            <label>İşdən ayrılma səbəbiniz</label><br /><br />
+            @Html.TextBoxFor(x => x.ReasonForDismissal, new { Valu = Model.ReasonForDismissal, @class = "form-control" })<br />
+
+
+            <label>Pozisyanız</label><br /><br />
+            @Html.TextBoxFor(x => x.PositionName, new { Valu = Model.PositionName, @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.PositionName, "", new { @class = "text-danger" })<br />
+
+
+            <label>İşinizlə bağlı əlavə bilik və bacarıqlarınız</label><br /><br />
+            @Html.TextBoxFor(x => x.KnowledgesAndSkills, new { Valu = Model.KnowledgesAndSkills, @class = "form-control" })<br />
+
+
+            <label>Deportament</label><br /><br />
+            @Html.DropDownListFor(x => x.DeportamentId, (List<SelectListItem>)ViewData["Dprtmnt"], "--Seçin--", new { @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.DeportamentId, "", new { @class = "text-danger" })<br />
+
+
+            <label>Hazırda qeyd etiyiniz işdə işləyirsiniz?</label><br /><br />
+            @Html.DropDownListFor(x => x.Status, new SelectList(Enum.GetValues(typeof(JobStatus))), "--Seçin--", new { @class = "form-control" })<br />
+
+
+            <input type="submit" class="btn btn-success" value="Yadda saxla">
+
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿@using CvYarat.Models
+@using CvYarat.Data.Enums
+@model List<WorkExperience>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div>
+        <h6><a href="/Work/AddWorkExperience">İş Təcrübəsi əlavə et</a></h6><br />
+
+        @foreach (var item in Model)
+        {
+
+            <form class="form-group" method="get">
+
+
+                <label>Müəssisə adı </label><br /><br />
+                @Html.TextBoxFor(x => @item.InstitutionName, new { Valu = @item.InstitutionName, @class = "form-control" })<br />
+
+                <label>Öhtəliyiniz</label><br /><br />
+                @Html.TextBoxFor(x => @item.Commitment, new { Valu = @item.Commitment, @class = "form-control" })<br />
+
+
+                <label>Başlama tarixi</label><br /><br />
+                @Html.TextBoxFor(x => @item.BeginDate, new { Valu = @item.BeginDate.ToShortDateString(), @class = "form-control" })<br />
+
+
+                <label>Bitmə tarixi</label><br /><br />
+                @Html.TextBoxFor(x => @item.EndDate, new { Valu = @item.EndDate.ToShortDateString(), @class = "form-control" })<br />
+
+
+                <label>İşdən ayrılma səbəbiniz</label><br /><br />
+                @Html.TextBoxFor(x => @item.ReasonForDismissal, new { Valu = @item.ReasonForDismissal, @class = "form-control" })<br />
+
+
+                <label>Pozisyanız</label><br /><br />
+                @Html.TextBoxFor(x => @item.PositionName, new { Valu = @item.PositionName, @class = "form-control" })<br />
+
+
+                <label>İşinizlə bağlı əlavə bilik və bacarıqlarınız</label><br /><br />
+                @Html.TextBoxFor(x => @item.KnowledgesAndSkills, new { Valu = @item.KnowledgesAndSkills, @class = "form-control" })<br />
+
+
+                <label>Hazırda qeyd etiyiniz işdə işləyirsiniz?</label><br /><br />
+                @Html.DropDownListFor(x => item.Status, new SelectList(Enum.GetValues(typeof(JobStatus))), "--Seçin--", new { @class = "form-control" })<br />
+
+            </form>
+
+            <a href="/Work/EditWorkExperience/@item.Id">Dəyiş</a> <a href="/Work/DeleteWorkExperience/@item.Id">Sil</a>
+        }
+    </div>
+</body>
+</html>

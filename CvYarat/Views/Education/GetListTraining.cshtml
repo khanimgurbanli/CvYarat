@@ -1,0 +1,59 @@
+﻿@using CvYarat.Models
+@model List<ClientTraining>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div>
+        <h6><a href="/Education/CreateProfDevp/1">Təlim və ixtisasartırma əlavə et</a></h6>
+        @foreach (var item in Model)
+        {
+            <form class="form-group" method="get">
+               
+                <div>
+                    <img src="@("~/images/"+ @item.Certification)" asp-append-version="true" width="250px" height="250px" />
+                </div><br /><br />
+
+                <label>Təlimin adı</label><br /><br />
+                @Html.TextBoxFor(x => @item.Name, new { Valu = @item.Name, @class = "form-control" })<br />
+
+                <label>Təlimçinin ədı və soyadı</label><br /><br />
+                @Html.TextBoxFor(x => @item.NameSurname, new { Valu = @item.NameSurname, @class = "form-control" })<br />
+
+                <label>Təlimçinin əlaqə nömrəsi</label><br /><br />
+                @Html.TextBoxFor(x => @item.Tel, new { Valu = @item.Tel, @class = "form-control" })<br />
+
+
+                <label>Təlimçinin e-poçt ünvanı</label><br /><br />
+                @Html.TextBoxFor(x => @item.Mail, new { Valu = @item.Mail, @class = "form-control" })<br />
+
+
+                <label>Təlimi verən qurum</label><br /><br />
+                @Html.TextBoxFor(x => @item.Instition, new { Valu = @item.Instition, @class = "form-control" })<br />
+
+
+                <label>Təlimin keçirildiyi yer</label><br /><br />
+                @Html.TextBoxFor(x => @item.Address, new { Valu = @item.Address, @class = "form-control" })<br />
+
+                <label>Təlimin başladığı tarix</label><br /><br />
+                @Html.TextBoxFor(x => @item.ProfBeginDate, new { Valu = @item.ProfEndDate, @class = "form-control" })<br />
+
+                <label>Təlimin bitdiyi tarix</label><br /><br />
+                @Html.TextBoxFor(x => @item.ProfEndDate, new { Valu = @item.ProfEndDate, @class = "form-control" })<br />
+
+                <label>Təlimlə bağlı əlavə qeydlər</label><br /><br />
+                @Html.TextBoxFor(x => @item.Note, new { Valu = @item.Note, @class = "form-control" })<br />
+
+            </form>
+
+            <a href="/Education/EditProfDevp/@item.Id">Dəyiş</a> <a href="/Education/DeleteProfDevp/@item.Id">Sil</a><br />
+        }
+
+    </div>
+</body>
+</html>

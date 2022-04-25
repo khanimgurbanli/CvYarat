@@ -1,0 +1,48 @@
+﻿@using CvYarat.Models
+@model Education
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <h3>Şəxsi məlumatlar</h3><br /><br />
+    <h2>@ViewBag.checkResultMessage</h2>
+    <div>
+        <form class="form-group" asp-action="CreateEdu" asp-controller="Education" method="post">
+
+            <label>Təhsil səviyyəsi</label><br /><br />
+            @Html.DropDownListFor(x => x.EducationLevelId, (List<SelectListItem>)ViewData["EduLevel"], "Seçin", new { @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.EducationLevelId, "", new { @class = "text-danger" })<br />
+
+            <label>İxtisas</label><br /><br />
+            @Html.TextBoxFor(x => x.Specialty, new { @placeholder = "Ixtisas", @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.Specialty, "", new { @class = "text-danger" })<br />
+
+            <label>Təhsil müəssisəsi</label><br /><br />
+            @Html.DropDownListFor(x => x.EduInstitutionId, (List<SelectListItem>)ViewData["Institution"], "Seçin", new { @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.EduInstitutionId, "", new { @class = "text-danger" })<br />
+
+
+            <label>Başlama tarixi</label><br /><br />
+            @Html.TextBoxFor(x => x.BeginDate, new { type = "date", @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.BeginDate, "", new { @class = "text-danger" })<br />
+
+
+            <label>Bitmə tarixi</label><br /><br />
+            @Html.TextBoxFor(x => x.EndDate, new { type = "date", @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.EndDate, "", new { @class = "text-danger" })<br />
+
+
+            <label>Giriş balı</label><br /><br />
+            @Html.TextBoxFor(x => x.Point, new { @class = "form-control" })<br />
+
+            <input type="submit" class="btn btn-success" value="Yadda saxla">
+        </form>
+    </div>
+</body>
+</html>

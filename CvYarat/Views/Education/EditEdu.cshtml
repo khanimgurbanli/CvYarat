@@ -1,0 +1,47 @@
+﻿@using CvYarat.Models
+@model Education
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <h3>Şəxsi məlumatlar</h3><br /><br />
+    <div>
+        <form class="form-group" asp-action="EditEdu" asp-controller="Education" method="post">
+
+            @Html.HiddenFor(x => x.Id)<br />
+
+            <label>Təhsil səviyyəsi </label><br /><br />
+
+            @Html.DropDownListFor(x => x.EducationLevelId, (List<SelectListItem>)ViewData["EduLevel"], "Seçin", new { @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.EducationLevelId, "", new { @class = "text-danger" })<br />
+
+            <label>İxtisas</label><br /><br />
+            @Html.TextBoxFor(x => x.Specialty, new { Valu = Model.Specialty, @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.Specialty, "", new { @class = "text-danger" })<br />
+
+            <label>Təhsil müəssisəsi</label><br /><br />
+            @Html.DropDownListFor(x => x.EduInstitutionId, (List<SelectListItem>)ViewData["Institution"], new { @class = "form-control" })<br />
+            @Html.ValidationMessageFor(x => x.EduInstitutionId, "", new { @class = "text-danger" })<br />
+
+
+            <label>Başlama tarixi</label><br /><br />
+            @Html.TextBoxFor(x => x.BeginDate, new { Valu = Model.BeginDate, @class = "form-control" })<br />
+
+
+            <label>Bitmə tarixi</label><br /><br />
+            @Html.TextBoxFor(x => x.EndDate, new { Valu = Model.EndDate, @class = "form-control" })<br />
+
+            <label>Giriş balı</label><br /><br />
+            @Html.TextBoxFor(x => x.Point, new { Valu = Model.Point, @class = "form-control" })<br />
+
+            <input type="submit" class="btn btn-success" value="Dəyişikliyi yadda saxla">
+        </form>
+    </div>
+    <a href="/Education/GetListEdu">Təhsiliniz</a>
+</body>
+</html>

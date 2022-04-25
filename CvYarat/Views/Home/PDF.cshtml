@@ -1,0 +1,207 @@
+﻿@using CvYarat.ViewModel
+@using CvYarat.Data.Enums
+@model ModelCollection
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <script src="~/js/site.js"></script>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script>
+        function generatePDF() {
+            const element = document.getElementById("invoice");
+            console.log(element)
+            html2pdf()
+                .from(element)
+                .save("CV")
+        }
+        console.log(56);
+    </script> 
+</head>
+<body>
+    <div id="invoice">
+        <form class="form-group" method="get">
+
+
+            <div>
+                <img src="@("~/images/"+ Model.Client.Photo)" asp-append-version="true" width="250px" height="250px" />
+            </div><br /><br />
+
+            <label>Ad</label><br /><br />
+            @Html.TextBoxFor(x => Model.Client.Name, new { Value = Model.Client.Name, @class = "form-control" })<br />
+
+            <label>Soyad</label><br /><br />
+            @Html.TextBoxFor(x => Model.Client.Surname, new { Value = Model.Client.Surname, @class = "form-control" })<br />
+
+            <label>Ata adı</label><br /><br />
+            @Html.TextBoxFor(x => Model.Client.FatherName, new { Value = Model.Client.FatherName, @class = "form-control" })<br />
+
+            <label>Cinsiyyət</label><br /><br />
+            @Html.DropDownListFor(x => Model.Client.Gender, new SelectList(Enum.GetValues(typeof(SelectGender))), new { @class = "form-control" })<br />
+
+            <label>Doğum tarixi</label><br /><br />
+            @Html.TextBoxFor(x => Model.Client.Birthdate, new { Value = Model.Client.Birthdate, @class = "form-control" })<br />
+
+            <label>Ailə vəziyyəti</label><br /><br />
+            @Html.DropDownListFor(x => Model.Client.MaritalStatus, new SelectList(Enum.GetValues(typeof(MrtlStatus))), new { @class = "form-control" })<br />
+
+
+            <label>Vətəndaşlıq</label><br />
+            @Html.TextBoxFor(x => Model.Client.Citizenship, new { Value = Model.Client.Citizenship, @class = "form-control" })<br />
+
+            <label>Elektron poçt ünvanı</label><br />
+            @Html.TextBoxFor(x => Model.Client.Mail, new { Value = Model.Client.Mail, @class = "form-control" })<br />
+
+
+            <label>Sürücülük vəsiqəsi</label><br />
+            @Html.DropDownListFor(x => Model.Client.DrivingLicense, new SelectList(Enum.GetValues(typeof(DrvgLicense))), new { @class = "form-control" })<br />
+
+
+            <label>Hərbi xidmət</label><br />
+            @Html.DropDownListFor(x => Model.Client.MilitaryService, new SelectList(Enum.GetValues(typeof(MltryService))), new { @class = "form-control" })<br />
+
+
+            <label>Yaşayış ünvanı</label><br />
+            @Html.TextBoxFor(x => Model.Client.LivingAddress, new { Value = Model.Client.LivingAddress, @class = "form-control" })<br />
+
+            <label>Qeydiyyatda olduğunuz</label><br />
+            @Html.TextBoxFor(x => Model.Client.RegistrationAddress, new { Value = Model.Client.RegistrationAddress, @class = "form-control" })<br />
+
+            <label>Mobil Nömrə</label><br />
+            @Html.TextBoxFor(x => Model.Client.MobPhone, new { Value = Model.Client.MobPhone, @class = "form-control" })<br />
+
+
+            <label>Linkedin hesab linki</label><br />
+            @Html.TextBoxFor(x => Model.Client.Linkedin, new { Value = Model.Client.Linkedin, @class = "form-control" })<br />
+
+            <label>Github hesab linki</label><br />
+            @Html.TextBoxFor(x => Model.Client.Github, new { Value = Model.Client.Github, @class = "form-control" })<br />
+
+            <label>Yaşadığınız şəhər</label><br /><br />
+            @Html.DropDownListFor(x => Model.Client.CityId, (List<SelectListItem>)@ViewData["City"], new { @class = "form-control" })<br />
+
+            <label>Əlavə qeyd</label><br />
+            @Html.TextBoxFor(x => Model.Client.Action, new { Value = Model.Client.Action, @class = "form-control" })<br />
+
+        </form>
+        }
+
+
+
+        @foreach (var edu in Model.Educations)
+        {
+            <form class="form-group" method="get">
+                <label>Təhsil səviyyəsi </label><br /><br />
+                @Html.DropDownListFor(x => @edu.EducationLevelId, (List<SelectListItem>)ViewData["EduLevel"], "Seçin", new { @class = "form-control" })<br />
+
+                <label>İxtisas</label><br /><br />
+                @Html.TextBoxFor(x => @edu.Specialty, new { Valu = @edu.Specialty, @class = "form-control" })<br />
+
+                <label>Təhsil müəssisəsi</label><br /><br />
+                @Html.DropDownListFor(x => @edu.EduInstitutionId, (List<SelectListItem>)ViewData["Institution"], new { @class = "form-control" })<br />
+
+
+                <label>Başlama tarixi</label><br /><br />
+                @Html.TextBoxFor(x => @edu.BeginDate, new { Valu = @edu.BeginDate, @class = "form-control" })<br />
+
+
+                <label>Bitmə tarixi</label><br /><br />
+                @Html.TextBoxFor(x => @edu.EndDate, new { Valu = @edu.EndDate, @class = "form-control" })<br />
+
+                <label>Giriş balı</label><br /><br />
+                @Html.TextBoxFor(x => @edu.Point, new { Valu = @edu.Point, @class = "form-control" })<br />
+            </form>
+        }
+
+
+        @foreach (var training in Model.ClientTrainings)
+        {
+            <div>
+                <img src="@("~/images/" + @training.Certification)" asp-append-version="true" width="250px" height="250px" />
+            </div><br /><br />
+
+            <label>Təlimin adı</label><br /><br />
+            @Html.TextBoxFor(x => @training.Name, new { Valu = @training.Name, @class = "form-control" })<br />
+
+            <label>Təlimçinin ədı və soyadı</label><br /><br />
+            @Html.TextBoxFor(x => @training.NameSurname, new { Valu = @training.NameSurname, @class = "form-control" })<br />
+
+            <label>Təlimçinin əlaqə nömrəsi</label><br /><br />
+            @Html.TextBoxFor(x => @training.Tel, new { Valu = @training.Tel, @class = "form-control" })<br />
+
+
+            <label>Təlimçinin e-poçt ünvanı</label><br /><br />
+            @Html.TextBoxFor(x => @training.Mail, new { Valu = @training.Mail, @class = "form-control" })<br />
+
+
+            <label>Təlimi verən qurum</label><br /><br />
+            @Html.TextBoxFor(x => @training.Instition, new { Valu = @training.Instition, @class = "form-control" })<br />
+
+
+            <label>Təlimin keçirildiyi yer</label><br /><br />
+            @Html.TextBoxFor(x => @training.Address, new { Valu = @training.Address, @class = "form-control" })<br />
+
+            <label>Təlimin başladığı tarix</label><br /><br />
+            @Html.TextBoxFor(x => @training.ProfBeginDate, new { Valu = @training.ProfEndDate, @class = "form-control" })<br />
+
+            <label>Təlimin bitdiyi tarix</label><br /><br />
+            @Html.TextBoxFor(x => @training.ProfEndDate, new { Valu = @training.ProfEndDate, @class = "form-control" })<br />
+
+            <label>Təlimlə bağlı əlavə qeydlər</label><br /><br />
+            @Html.TextBoxFor(x => @training.Note, new { Valu = @training.Note, @class = "form-control" })<br />
+        }
+        @foreach (var skill in Model.ClientSkills)
+        {
+
+            <label>Dil biliyi</label><br /><br />
+            @Html.TextBoxFor(x => @skill.Name, new { Value = @skill.Name, @class = "form-control" })<br />
+
+
+            <label>Dil bilik səviyyəsi</label><br /><br />
+            @Html.DropDownListFor(x => @skill.Level, new SelectList(Enum.GetValues(typeof(LevelCheck))), new { @class = "form-control" })<br />
+        }
+        @foreach (var work in Model.WorkExperiences)
+        {
+            <form class="form-group" method="get">
+                <label>Müəssisə adı </label><br /><br />
+                @Html.TextBoxFor(x => @work.InstitutionName, new { Valu = work.InstitutionName, @class = "form-control" })<br />
+
+                <label>Öhtəliyiniz</label><br /><br />
+                @Html.TextBoxFor(x => @work.Commitment, new { Valu = @work.Commitment, @class = "form-control" })<br />
+
+
+                <label>Başlama tarixi</label><br /><br />
+                @Html.TextBoxFor(x => @work.BeginDate, new { Valu = @work.BeginDate.ToShortDateString(), @class = "form-control" })<br />
+
+
+                <label>Bitmə tarixi</label><br /><br />
+                @Html.TextBoxFor(x => @work.EndDate, new { Valu = @work.EndDate.ToShortDateString(), @class = "form-control" })<br />
+
+
+                <label>İşdən ayrılma səbəbiniz</label><br /><br />
+                @Html.TextBoxFor(x => @work.ReasonForDismissal, new { Valu = @work.ReasonForDismissal, @class = "form-control" })<br />
+
+
+                <label>Pozisyanız</label><br /><br />
+                @Html.TextBoxFor(x => @work.PositionName, new { Valu = @work.PositionName, @class = "form-control" })<br />
+
+
+                <label>İşinizlə bağlı əlavə bilik və bacarıqlarınız</label><br /><br />
+                @Html.TextBoxFor(x => @work.KnowledgesAndSkills, new { Valu = @work.KnowledgesAndSkills, @class = "form-control" })<br />
+
+
+                <label>Hazırda qeyd etiyiniz işdə işləyirsiniz?</label><br /><br />
+                @Html.DropDownListFor(x => @work.Status, new SelectList(Enum.GetValues(typeof(JobStatus))), "--Seçin--", new { @class = "form-control" })<br />
+
+            </form>
+        }
+    </div>
+    <button class="btn btn-success"  onclick="generatePDF()">Endirin</button>
+</body>
+</html>

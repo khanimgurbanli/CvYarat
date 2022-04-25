@@ -1,0 +1,49 @@
+﻿@using CvYarat.Models
+@model List<Education>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div>
+        <h5><a href="/Education/CreateEdu">Təhsil əlavə et</a></h5>
+        <h6><a href="/Education/CreateProfDevp">Təlim və ixtisasartırma</a></h6>
+        @foreach (var item in Model)
+        {
+
+            <form class="form-group" method="get">
+
+
+                <label>Təhsil səviyyəsi </label><br /><br />
+                @Html.DropDownListFor(x => @item.EducationLevelId, (List<SelectListItem>)ViewData["EduLevel"], "Seçin", new { @class = "form-control" })<br />
+        
+
+                <label>İxtisas</label><br /><br />
+                @Html.TextBoxFor(x => @item.Specialty, new { Valu = @item.Specialty, @class = "form-control" })<br />
+            
+
+                <label>Təhsil müəssisəsi</label><br /><br />
+                @Html.DropDownListFor(x => @item.EduInstitutionId, (List<SelectListItem>)ViewData["Institution"], new { @class = "form-control" })<br />
+     
+
+
+                <label>Başlama tarixi</label><br /><br />
+                @Html.TextBoxFor(x => @item.BeginDate, new { Valu = @item.BeginDate, @class = "form-control" })<br />
+
+
+                <label>Bitmə tarixi</label><br /><br />
+                @Html.TextBoxFor(x => @item.EndDate, new { Valu = @item.EndDate, @class = "form-control" })<br />
+
+                <label>Giriş balı</label><br /><br />
+                @Html.TextBoxFor(x => @item.Point, new { Valu = @item.Point, @class = "form-control" })<br />
+            </form>
+
+            <a href="/Education/EditEdu/@item.Id">Dəyiş</a> <a href="/Education/DeleteEdu/@item.Id">Sil</a>
+        }
+    </div>
+</body>
+</html>

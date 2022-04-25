@@ -1,0 +1,33 @@
+﻿@using CvYarat.Models
+@using CvYarat.Data.Enums
+@model List<ClientSkill>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <h3>Bilik və bacarıqlar</h3><br /><br />
+    <h5><a class="btn btn-success" href="/Skill/AddSkill">Bacarıq əlavə edin</a></h5><br />
+    <div>
+        @foreach (var item in Model)
+        {
+            <form class="form-group" asp-action="EditSkill" asp-controller="Skill" method="post" enctype="multipart/form-data">
+
+                <label>Dil biliyi</label><br /><br />
+                @Html.TextBoxFor(x => @item.Name, new { Value = @item.Name, @class = "form-control" })<br />
+
+
+                <label>Dil bilik səviyyəsi</label><br /><br />
+                @Html.DropDownListFor(x => @item.Level, new SelectList(Enum.GetValues(typeof(LevelCheck))), new { @class = "form-control" })<br />
+
+                <h6><a href="/Skill/EditSkill/@item.Id">Dəyiş</a> <a href="/Skill/DeleteSkill/@item.Id">Sil</a></h6>
+            </form>
+        }
+    </div>
+</body>
+</html>
