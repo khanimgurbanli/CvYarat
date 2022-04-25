@@ -21,8 +21,6 @@ namespace CvYarat.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext db;
-        private readonly IWebHostEnvironment _hostEnvironment;
-
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
@@ -94,26 +92,6 @@ namespace CvYarat.Controllers
             return View(collection);
         }
 
-
-
-        public IActionResult PDFCV(int param)
-        {
-            var getList = db.Clients.Where(c => c.UserId == User
-                 .FindFirst(ClaimTypes.NameIdentifier).Value)
-                .Include(e => e.Educations)
-                .Include(s => s.ClientSkills)
-                .Include(w => w.WorkExperiences)
-                .Include(t => t.ClientTrainings)
-               .ToList();
-
-            return View();
-        }
-
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

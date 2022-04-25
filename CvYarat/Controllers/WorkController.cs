@@ -2,8 +2,10 @@
 using CvYarat.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -12,13 +14,23 @@ namespace CvYarat.Controllers
 {
     public class WorkController : Controller
     {
+       
+        WorkExperience w=new();
+
+        private readonly ILogger<WorkController> _logger;
         private readonly ApplicationDbContext db;
-        public WorkController(ApplicationDbContext db)
+        public WorkController(ILogger<WorkController> logger, ApplicationDbContext db)
         {
+            _logger = logger;
             this.db = db;
         }
 
-        WorkExperience w=new();
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
 
         public IActionResult ListOfWorkExperiences()
         {

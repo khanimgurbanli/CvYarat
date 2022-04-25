@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
@@ -17,15 +19,25 @@ namespace CvYarat.Controllers
     [Authorize]
     public class EducationController : Controller
     {
+        //Təhsil müəsisəsi əlavə et CRUD
         Education e = new();
         AddCertificationImage add = new();
         EditCertificationImage edit = new();
         ClientTraining training = new();
 
+        private readonly ILogger<EducationController> _logger;
         private readonly ApplicationDbContext db;
-        public EducationController(ApplicationDbContext db)
+        public EducationController(ILogger<EducationController> logger, ApplicationDbContext db)
         {
+            _logger = logger;
             this.db = db;
+        }
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
 
@@ -275,6 +287,7 @@ namespace CvYarat.Controllers
 
         public IActionResult CreateProfDevp(int id )
         {
+
             if (db.ClientTrainings
              .Where(e => e.ClientId == (db.Clients
              .Where(c => c.UserId == User
@@ -296,7 +309,7 @@ namespace CvYarat.Controllers
         [HttpPost]
         public IActionResult CreateProfDevp(AddCertificationImage addCertification)
         {
-
+           //yoxla eger melumat varsa mesaj versin
 
             if (!ModelState.IsValid)
             {

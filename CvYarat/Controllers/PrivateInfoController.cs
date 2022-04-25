@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
@@ -19,13 +21,19 @@ namespace CvYarat.Controllers
     {
 
         Client c = new();
+        private readonly ILogger<PrivateInfoController> _logger;
         private readonly ApplicationDbContext db;
-        private readonly IWebHostEnvironment webHostEnvironment;
-
-        public PrivateInfoController(ApplicationDbContext db, IWebHostEnvironment hostEnvironment)
+        public PrivateInfoController(ILogger<PrivateInfoController> logger, ApplicationDbContext db)
         {
+            _logger = logger;
             this.db = db;
-            webHostEnvironment = hostEnvironment;
+        }
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
 

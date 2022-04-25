@@ -2,8 +2,10 @@
 using CvYarat.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -15,10 +17,19 @@ namespace CvYarat.Controllers
     {
         ClientSkill  s = new();
 
+        private readonly ILogger<SkillController> _logger;
         private readonly ApplicationDbContext db;
-        public SkillController(ApplicationDbContext db)
+        public SkillController(ILogger<SkillController> logger, ApplicationDbContext db)
         {
+            _logger = logger;
             this.db = db;
+        }
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         public IActionResult ListOfSkill()
